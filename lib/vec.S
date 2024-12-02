@@ -86,6 +86,28 @@ pop_vec:
 	ld a0, 0(t0)
 	ret
 
+# Counts the number of times a number appears in the vec
+# a0: ptr to vec
+# a1: the number to count
+count_vec:
+	ld t0, 8(a0)	# size
+	ld t1, 16(a0)	# data
+
+	li t2, 0		# count
+	li t3, 0		# index
+
+count_vec_loop:
+	ld t4, 0(t1)
+	bne t4, a1, count_vec_loop_tail
+	addi t2, t2, 1
+count_vec_loop_tail:
+	addi t3, t3, 1
+	addi t1, t1, 8
+	blt t3, t0, count_vec_loop
+
+	mv a0, t2
+	ret
+
 # increases the capacity of a vec by cap 
 # a0: ptr to the vec
 # a1: cap

@@ -22,7 +22,7 @@ alloc:
 	ecall
 	ret
 
-# allocate a chunk of memory
+# deallocate a chunk of memory
 # a0: ptr
 # a1: size
 # ret(a0): error (0 on success)
