@@ -21,6 +21,21 @@ new_vec:
 	addi sp, sp, 8
 	ret
 
+# drops the vector deallocating its buffer
+# a0: the vec
+drop_vec:
+	addi sp, sp, -8
+	sd ra, 0(sp)
+
+	ld a1, 0(a0)	# capacity
+	ld a0, 16(a0)	# data
+
+	call dealloc
+
+	ld ra, 0(sp)
+	addi sp, sp, 8
+	ret
+
 # Pushes an element to the end of the vec
 # a0: ptr to the vec
 # a1: byte to push

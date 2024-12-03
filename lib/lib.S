@@ -81,6 +81,8 @@ read_line_loop:
 read_line_end:
 
 	mv a0, s2
+	addi s0, s0, 1
+	sb zero, 0(s0)
 
 	ld ra, 0(sp)
 	ld s0, 8(sp)
